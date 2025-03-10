@@ -20,6 +20,31 @@
         return kodePosTable.ContainsKey(kelurahan) ? kodePosTable[kelurahan] : "Kode pos tidak ditemukan";
     }
 }
+
+class DoorMachine
+{
+    private enum State { Locked, Unlocked }
+    private State currentState;
+
+    public DoorMachine()
+    {
+        currentState = State.Locked;
+        Console.WriteLine("Pintu terkunci");
+    }
+
+    public void Unlock()
+    {
+        currentState = State.Unlocked;
+        Console.WriteLine("Pintu tidak terkunci");
+    }
+
+    public void Lock()
+    {
+        currentState = State.Locked;
+        Console.WriteLine("Pintu terkunci");
+    }
+}
+
 class Program
 {
     static void Main()
@@ -28,5 +53,12 @@ class Program
         Console.WriteLine("Masukkan kelurahan: ");
         string kelurahan = Console.ReadLine();
         Console.WriteLine("Kode Pos: " + KodePos.GetKodePos(kelurahan));
+
+        // State-based construction
+        DoorMachine door = new DoorMachine();
+        Console.WriteLine("Membuka pintu...");
+        door.Unlock();
+        Console.WriteLine("Mengunci pintu kembali...");
+        door.Lock();
     }
 }
